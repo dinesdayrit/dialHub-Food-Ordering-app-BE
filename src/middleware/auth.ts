@@ -1,5 +1,5 @@
-import { NextFunction, Request, Response } from "express";
 import { auth } from "express-oauth2-jwt-bearer";
+import { Request, Response, NextFunction } from "express";
 import jwt from "jsonwebtoken";
 import User from "../models/user";
 
@@ -29,6 +29,7 @@ export const jwtParse = async (
     return res.sendStatus(401);
   }
 
+  // Bearer lshdflshdjkhvjkshdjkvh34h5k3h54jkh
   const token = authorization.split(" ")[1];
 
   try {
@@ -44,7 +45,7 @@ export const jwtParse = async (
     req.auth0Id = auth0Id as string;
     req.userId = user._id.toString();
     next();
-  } catch (Error) {
+  } catch (error) {
     return res.sendStatus(401);
   }
 };
