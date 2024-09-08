@@ -36,6 +36,7 @@ type CheckoutSessionRequest = {
 };
 
 const stripeWebhookHandler = async (req: Request, res: Response) => {
+  console.log("stripeWebhookHandler", req.body);
   let event;
 
   try {
