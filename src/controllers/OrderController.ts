@@ -36,7 +36,6 @@ type CheckoutSessionRequest = {
 };
 
 const stripeWebhookHandler = async (req: Request, res: Response) => {
-  console.log("stripeWebhookHandler", req.body);
   let event;
 
   try {
@@ -48,6 +47,7 @@ const stripeWebhookHandler = async (req: Request, res: Response) => {
     );
   } catch (error: any) {
     console.log(error);
+    console.log("error stripeWebhookHandler");
     return res.status(400).send(`Webhook error: ${error.message}`);
   }
 
@@ -69,6 +69,7 @@ const stripeWebhookHandler = async (req: Request, res: Response) => {
 };
 
 const createCheckoutSession = async (req: Request, res: Response) => {
+  console.log("createCheckoutSession");
   try {
     const checkoutSessionRequest: CheckoutSessionRequest = req.body;
 
@@ -149,6 +150,7 @@ const createSession = async (
   deliveryPrice: number,
   restaurantId: string
 ) => {
+  console.log("createSession");
   const sessionData = await STRIPE.checkout.sessions.create({
     line_items: lineItems,
     shipping_options: [
