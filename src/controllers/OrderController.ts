@@ -47,15 +47,12 @@ const stripeWebhookHandler = async (req: Request, res: Response) => {
     );
   } catch (error: any) {
     console.log(error);
-    console.log("error stripeWebhookHandler");
     return res.status(400).send(`Webhook error: ${error.message}`);
   }
 
   if (event.type === "checkout.session.completed") {
     const order = await Order.findById(event.data.object.metadata?.orderId);
-    console.log("diri ni wala nag paid");
     if (!order) {
-      console.log("or diri ni wala nag paid");
       return res.status(404).json({ message: "Order not found" });
     }
 
